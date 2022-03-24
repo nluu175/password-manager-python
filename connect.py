@@ -3,6 +3,12 @@ import psycopg2
 from config import config
 
 
+def table_initializer(cur):
+    # Create Table
+    cur.execute(open("./queries/create_users_table.sql", "r").read())
+    cur.execute(open("./queries/create_accounts_table.sql", "r").read())
+
+
 def connect():
     """ Connect to the PostgreSQL database server """
     conn = None
@@ -16,28 +22,15 @@ def connect():
 
         # create a cursor
         cur = conn.cursor()
+        table_initializer(cur)
+        print("Tables created!")
 
-        # execute a statement
-        print('PostgreSQL database version:')
-        cur.execute('SELECT version()')
-
-        # display the PostgreSQL database server version
-        db_version = cur.fetchone()
-        print(db_version)
-
-        # close the communication with the PostgreSQL
-        cur.execute(
-            "CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
-        conn.commit()  # <--- makes sure the change is shown in the database
-
+        conn.commit()
         cur.close()
+
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:
             conn.close()
             print('Database connection closed.')
-
-
-if __name__ == '__main__':
-    connect()
