@@ -1,5 +1,9 @@
 # Password Manager 
 
+
+## Why this?
+- I want to make more secure passwords and also a place to store them as well. Normally, my password are stored in both the browser and icloud, but sometimes they lack the functionalities that I want.
+
 ## How to run this?
 - Make sure to have PostgreSQL installed on your machine!
 - Also, create a database with the name "password_manager"
@@ -24,6 +28,4 @@ password=<your_password>
 - Hash password? Choose a hash password method!!!
 
 ## Database Schema
-```sql
-
-```
+- Check queries directory for more information.
