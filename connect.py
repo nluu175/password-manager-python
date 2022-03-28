@@ -3,6 +3,7 @@ import psycopg2
 from config import config
 
 
+# This function creates the table
 def table_initializer(cur):
     # Create Table
     cur.execute(open("./queries/create_users_table.sql", "r").read())
