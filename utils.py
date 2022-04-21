@@ -1,3 +1,4 @@
+import bcrypt
 import string
 import random
 
@@ -18,4 +19,12 @@ def password_generator(length):
     all_chars = letters + digits + symbols
 
     pre_pwd = random.sample(all_chars, length)
+
     return "".join(pre_pwd)
+
+
+def hash_password(password):
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+
+    return hashed_password.decode('utf-8')
